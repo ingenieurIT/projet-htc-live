@@ -1,0 +1,78 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e2f2f7;">
+    <a class="navbar-brand" href="/">VProo STORES</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Accueil<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Categories
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </ul>
+        </li>
+
+      </ul>
+
+      <form action="{% url 'accueil' %}" method="get" class="form-inline">
+        {% csrf_token %}
+        <input class="form-control mr-sm-2" name="q" type="search" placeholder="Chercher un PC" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Go</button>
+      </form>
+
+    </div>
+  </nav>
+
+
+
+<div>
+    <div>
+        <a href="{% url 'accueil' %}"></a>
+    </div>
+
+    {% for categorie in categories  %}
+            <a href="{% url 'accueil' %}?q={{categorie.nom}}">{{categore.nom}}  </a>
+    {% endfor %}
+    
+</div>
+{% if request.user.is_authenticated %}
+
+  <div class=""></div>
+  <h3 style="text-align: center;">Bienvenue 
+    {% if request.user.is_superuser %}
+    <strong>Admin</strong>
+      {% else %}
+    <strong>{{request.user}}</strong>
+    {% endif %}</h3>
+
+  <div>
+  <a href="{% url 'logout' %}" class="btn btn-danger" style="margin-left: 2rem;">Logout</a>
+  
+  {% if request.user.is_superuser %}
+    <h3 style="text-align: right;"><a href="{% url 'ajouter_art' %}" class="btn btn-warning">
+      Ajouter un article</a></h3>
+  {% endif %}
+  </div>
+  
+    
+{% else %}
+
+  <h4 style="text-align: center;">Compte Invite</h4>
+  <a href="{% url 'login' %}" class="btn btn-info" style="margin-left: 2rem;">Login</a>
+    
+{% endif %} <hr>

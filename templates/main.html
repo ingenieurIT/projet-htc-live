@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/css/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/css/main.css' %}">
+    <script src="{% static 'styles/js/bootstrap.js' %}"></script>
+    <title>HTC-Stores-CAM</title>
+    <style>
+        html{
+            height: auto;
+        }
+        body {
+                background-color: rgba(243, 243, 243, 0.857);
+        }
+        .asteriskField{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    
+    {% include 'nav.html' %}
+    <div class="container">
+                    
+
+        {% block content %}
+          
+    
+        {% endblock content %}
+
+
+    </div>
+    
+    {% include 'footer.html' %}
+   
+<script src="{% static 'styles/js/bootstrap.js' %}">    
+</script>
+<script src="{% static 'styles/js/main.js' %}"></script>
+</body>
+</html>
