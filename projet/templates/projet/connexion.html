@@ -1,0 +1,112 @@
+{% extends "main.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    
+
+{% if page == 'login' %}
+
+    {% for msg in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" id="msg" role="alert">
+        <strong>Oups !</strong>{{msg}}
+        </div>
+    {% endfor %}
+
+    <div>
+            <div class="row justify-content-center">
+                <div class="card" 
+                style="width: 28rem; 
+                       border: 1px solid #7c7c7c;
+                       border-radius: 10px;
+                       height: auto;
+                       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">
+
+                    <div class="card-body">
+                        <h4 style="text-align: center;">Login</h4>
+                        <div class="card-text">
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <br>
+                                <div class="form-group">
+                                    <label>Nom d'utilisateur</label>
+                                    <input class="form-control" type="text" name="username" placeholder="Nom d'utilisateur">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="">Mot de passe</label>
+                                    <input class="form-control" type="password" name="password" placeholder="**********">
+                                </div>
+                    
+                                <input class="btn btn-primary btn-block" type="submit" value="Login">
+                            </form>
+                            <br>
+                            <p>Vous n'avez pas encore de compte ? <a href="{% url 'enregistrer' %}">Creer un compte</a></p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+    </div>
+
+{% else %}
+
+{% for msg in messages %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong>Oups!! </strong>{{msg}}
+</div>
+  
+{% endfor %}
+
+    <div class="row justify-content-center">
+        <div class="card" 
+        style="width: 35rem; 
+               border: 1px solid #a2a3a3;
+               border-radius: 10px;
+               height: auto;">
+
+            <div class="card-body">
+                <h4 style="text-align: center;"><strong>Creation de Compte</strong></h4>
+                <div class="card-text">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="">Nom d'utilisateur</label>
+                            <input class="form-control" type="text" name="username">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Email</label>
+                            <input class="form-control" type="text" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Mot de Passe</label>
+                            <input class="form-control" type="password" name="password1">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Confirmation mot de passe</label>
+                            <input class="form-control" type="password" name="password2">
+                        </div>    
+                        <button type="submit" class="btn btn-success btn-block">Enregistrer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+            
+        </div>
+    </div>    
+{% endif %}
+
+{% endblock content %}
+
+<script>
+    setTimeout(
+      function(){
+        if ($('#msg').length > 0) {
+          $('#msg').remove();
+        }
+    }, 2000)
+  </script>
